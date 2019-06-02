@@ -1,0 +1,67 @@
+AULA (SABADO)
+
+- Painel
+- Cloud Shell
+- Azure Mobile
+- Conexão Powershell
+	Download Powershell for Azure
+		PS:/ Login-AzureRMAccount
+		PS:/ Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.Network"
+		PS:/ Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.Compute"
+                PS:/ Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.Storage"
+
+***** Criar Azure Resource Group *****
+
+[1] Login-AzureRmAccount   [Loga na conta Azure] (Se estiver local, se não estiver utilize o Cloud Shell)
+
+[2] Get-AzureRmResourceGroup  [Lista todos os Grupos de Recursos que existem na Assinatura]
+
+[3] Get-AzureRmLocation | select Location  {Lista todas as localizações possíveis para se criar um grupo de recurso]
+
+[4] New-AzureRmResourceGroup -ResourceGroupName "AZR-CENTRO-EUA" -Location "centralus"  [Cria um Grupo de Recurso]
+
+***** Criar Rede Virtual *****
+
+[1] Login-AzureRmAccount  [Loga na conta Azure] (Se estiver local, se não estiver utilize o Cloud Shell)
+
+[2] Get-AzureRmVirtualNetwork -ResourceGroupName AZR-CENTRO-EUA
+
+[3] $subnet1 = New-AzureRmVirtualNetworkSubnetConfig -Name "SR-VMS-CENTRO-EUA" -AddressPrefix 10.10.1.0/24
+
+[4] New-AzureRmVirtualNetwork -Name "REDE-CENTRO-EUA" -ResourceGroupName "AZR-EUA" -Location "centralus" -AddressPrefix 10.10.0.0/16 -Subnet $subnet1
+
+****** Azure File Sync ******
+
+[1] https://go.microsoft.com/fwlink/?linkid=858257
+
+[2] Install-Module -Name AzureRM
+
+****** Azure AzCopy ******
+
+[1] echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod/ xenial main" > azure.list
+[2] sudo cp ./azure.list /etc/apt/sources.list.d/
+[3] sudo apt-key adv --keyserver packages.microsoft.com --recv-keys EB3E94ADBE1229CF
+
+[4] sudo apt-get update
+[5] sudo apt-get install azcopy
+
+azcopy \
+	--source /mnt/myfiles/abc.txt \
+	--destination https://myaccount.blob.core.windows.net/mycontainer/abc.txt \
+	--dest-key <key>
+
+azcopy \
+	--source https://myaccount.blob.core.windows.net/mycontainer/abc.txt \
+	--destination /mnt/myfiles/abc.txt \
+	--source-key <key> 
+
+azcopy --source /etc/network/ --destination https://storagefilesyncawseazure.blob.core.windows.net/backup/ --dest-key kCIA+l0z/cZZMS4zNkHd5B+zs2cCi+VIfmW24RKZUeUdZljYLfdyk626EmYnwCZNNm3dQLRpYMvS5Gxca18Ulg== --recursive
+
+
+
+
+
+
+
+
+

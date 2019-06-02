@@ -1,0 +1,11 @@
+[Install NGINX]
+sudo apt update
+sudo apt install nginx
+sudo systemctl start nginx
+sudo systemctl status nginx
+sudo systemctl stop nginx
+
+104.41.228.220 europa.azureexperience.com.br
+40.122.146.183 eua.azureexperience.com.br
+
+www.azureexperience.com.br
